@@ -1,0 +1,33 @@
+@import "@fontsource-variable/bricolage-grotesque/wdth.css";
+@import "@fontsource-variable/instrument-sans/index.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 236 239 235; --surface: 247 248 246; --ink: 14 21 18;
+  --muted: 86 97 91; --line: 203 210 204; --accent: 43 70 240;
+}
+:root[data-theme="dark"] {
+  --bg: 12 17 15; --surface: 18 25 22; --ink: 232 236 232;
+  --muted: 150 162 155; --line: 38 48 43; --accent: 143 162 255;
+}
+@layer base {
+  html { color-scheme: light; scroll-behavior: smooth; }
+  html[data-theme="dark"] { color-scheme: dark; }
+  body { @apply bg-bg font-sans text-ink antialiased; transition: background-color .25s, color .25s; }
+  :focus-visible { outline: 2px solid rgb(var(--accent)); outline-offset: 3px; border-radius: 2px; }
+  ::selection { background: rgb(var(--accent) / .25); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+}
+
+/* Seamless small-cell grid at very low opacity: it removes the flat look without touching section borders. */
+body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M0 .5H24M.5 0V24' stroke='%230E1512' stroke-opacity='.035' fill='none'/%3E%3C/svg%3E"); background-repeat: repeat; }
+:root[data-theme="dark"] body { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M0 .5H24M.5 0V24' stroke='%23E8ECE8' stroke-opacity='.03' fill='none'/%3E%3C/svg%3E"); }
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-12; }
+  .display { font-family: "Bricolage Grotesque Variable", system-ui, sans-serif; font-stretch: 80%; font-weight: 700; letter-spacing: -0.02em; line-height: .95; }
+  .link-u { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size .25s; }
+  .link-u:hover { background-size: 0 1px; background-position: 100% 100%; }
+}
